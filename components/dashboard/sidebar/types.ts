@@ -1,3 +1,4 @@
+import { Role } from "@/lib/features/auth/types";
 import { LucideIcon } from "lucide-react";
 
 export interface SidebarNavItem {
@@ -7,7 +8,7 @@ export interface SidebarNavItem {
 }
 
 export interface SidebarRole {
-  id: string;
+  id: Role;
   name: string;
   href: string;
 }

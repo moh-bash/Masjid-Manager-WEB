@@ -5,12 +5,13 @@ import { SidebarRole, SidebarUser } from "./types";
 import SidebarRoleSwitcher from "./SidebarRoleSwitcher";
 
 import imageUser from "@/public/images/user.jpg";
+import { Role } from "@/lib/features/auth/types";
 
 interface SidebarProfileProps {
   user: SidebarUser;
   roles: SidebarRole[];
-  activeRoleId: string;
-  onRoleChange: (roleId: string) => void;
+  activeRoleId: Role;
+  onRoleChange: (roleId: Role) => void;
 }
 
 export default function SidebarProfile({

@@ -13,9 +13,9 @@ export default function SidebarNav({
 }: SidebarNavProps) {
   return (
     <nav className="flex flex-col gap-3">
-      {items.map((item) => (
+      {items?.map((item) => (
         <SidebarNavItem
-          key={item.href}
+          key={`${item.label}-${item.href}`}
           item={item}
           onNavigate={onNavigate}
         />

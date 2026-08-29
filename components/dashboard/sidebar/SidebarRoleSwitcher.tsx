@@ -4,13 +4,13 @@ import { Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 import { SidebarRole } from "./types";
-import Router from "next/router";
 import Link from "next/link";
+import { Role } from "@/lib/features/auth/types";
 
 interface SidebarRoleSwitcherProps {
   roles: SidebarRole[];
-  activeRoleId: string;
-  onRoleChange: (roleId: string) => void;
+  activeRoleId: Role;
+  onRoleChange: (roleId: Role) => void;
 }
 
 export default function SidebarRoleSwitcher({
@@ -24,7 +24,7 @@ export default function SidebarRoleSwitcher({
     (role) => role.id === activeRoleId,
   );
 
-  function handleRoleChange(roleId: string) {
+  function handleRoleChange(roleId: Role) {
     onRoleChange(roleId);
     setIsOpen(false);
   }

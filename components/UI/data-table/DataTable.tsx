@@ -93,7 +93,7 @@ export default function DataTable<T>({
                     {columns.map((column) => (
                       <td
                         key={column.key}
-                        className={`whitespace-nowrap px-6 py-2 text-sm text-slate-600 ${column.className ?? ""
+                        className={`whitespace-nowrap px-4 py-2 text-sm text-slate-600 ${column.className ?? ""
                           }`}
                       >
                         {column.render

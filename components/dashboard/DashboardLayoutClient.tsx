@@ -1,22 +1,24 @@
 "use client";
 
 import { Menu, Mosque } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import Sidebar from "./sidebar/Sidebar";
-
 import {
-    SidebarNavItem,
   SidebarRole,
   SidebarUser,
 } from "./sidebar/types";
 
-import { dashboardNavigation, UserRole } from "@/config/dashboard-navigation";
+import {
+  dashboardNavigation,
+  UserRole,
+} from "@/config/dashboard-navigation";
 
 interface DashboardLayoutClientProps {
   user: SidebarUser;
   roles: SidebarRole[];
-  initialRoleId: string;
+  initialRoleId: UserRole;
   children: React.ReactNode;
 }
 
@@ -26,12 +28,18 @@ export default function DashboardLayoutClient({
   initialRoleId,
   children,
 }: DashboardLayoutClientProps) {
-  const [activeRoleId, setActiveRoleId] = useState(initialRoleId);
+  const pathname = usePathname();
+  const [activeRoleId, setActiveRoleId] = useState<UserRole>(initialRoleId);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const items = dashboardNavigation[activeRoleId as UserRole] as SidebarNavItem[];
+  const navigation = dashboardNavigation(pathname);
+  const items = navigation[activeRoleId] || [];
 
   function handleLogout() {
     console.log("Logout");
+  }
+
+  function handleRoleChange(role: UserRole) {
+    setActiveRoleId(role);
   }
 
   return (
@@ -41,15 +49,14 @@ export default function DashboardLayoutClient({
         roles={roles}
         activeRoleId={activeRoleId}
         items={items}
-        onRoleChange={setActiveRoleId}
+        onRoleChange={handleRoleChange}
         onLogout={handleLogout}
         isMobileOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
       />
-
       <main className="min-h-screen lg:mr-[320px]">
         {/* Header Mobile */}
-        <header className="sticky top-0 right-0 left-0 flex w-full h-18 justify-between items-center px-5 rounded-b-3xl bg-gray-950 lg:hidden">
+        <header className="sticky top-0 right-0 left-0 flex h-18 w-full items-center justify-between rounded-b-3xl bg-gray-950 px-5 lg:hidden">
           <button
             type="button"
             aria-label="فتح القائمة"
@@ -66,13 +73,11 @@ export default function DashboardLayoutClient({
           >
             <Menu className="size-7" />
           </button>
-
-          <span className="text-white text-lg font-semibold">
+          <span className="text-lg font-semibold text-white">
             مسجدي
-            <Mosque className="size-6 inline-block mr-2" />
+            <Mosque className="mr-2 inline-block size-6" />
           </span>
         </header>
-
         {children}
       </main>
     </div>

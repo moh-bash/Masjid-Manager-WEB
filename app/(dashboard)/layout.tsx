@@ -1,43 +1,41 @@
 import DashboardLayoutClient from "@/components/dashboard/DashboardLayoutClient";
+import { ROLE_CONFIG } from "@/lib/features/auth/roles";
+import { currentUser } from "@/lib/features/auth/services/auth.service";
+import { User } from "@/lib/features/auth/types";
 
 export default async function DashboardLayout({
-  children,
+  children, params
 }: {
   children: React.ReactNode;
+   params: {  };
 }) {
+  let userMe: User | null = null;
+
+  try {
+    userMe = await currentUser();
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+  }
+
+  if (!userMe) {
+    return null;
+  }
+
   const user = {
-    name: "محمد أحمد محمود",
+    name: userMe.name || "John Doe",
     image: "/images/profile.jpg",
   };
 
-  const roles = [
-    {
-      id: "SYSTEM_ADMIN",
-      name: "مدير النظام",
-      href: "/admin",
-    },
-    {
-      id: "MOSQUE_MANAGER",
-      name: "مدير المسجد",
-      href: "/mosque",
-    },
-    {
-      id: "CIRCLE_TEACHER",
-      name: "مدرس الحلقة",
-      href: "/teacher",
-    },
-    {
-      id: "PARENT",
-      name: "ولي الأمر",
-      href: "/parent",
-    },
-  ];
+  const userRoles = userMe.role.map((role) => ({
+    id: role,
+    ...ROLE_CONFIG[role],
+  }));
 
   return (
     <DashboardLayoutClient
       user={user}
-      roles={roles}
-      initialRoleId="SYSTEM_ADMIN"
+      roles={userRoles}
+      initialRoleId={userRoles[0]?.id}
     >
       {children}
     </DashboardLayoutClient>

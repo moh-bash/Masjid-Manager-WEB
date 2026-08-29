@@ -50,7 +50,7 @@ export default function RegisterForm() {
       console.log(response);
       console.log('====================================');
 
-      router.push("/admin");
+      router.push("/parent");
 
     } catch (error) {
       setErrorMessage("حدث خطأ أثناء تسجيل المستخدم");

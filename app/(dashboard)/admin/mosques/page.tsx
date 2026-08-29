@@ -1,13 +1,14 @@
 "use client";
 import DashboardPage from "@/components/dashboard/DashboardPage";
+import { getMosqueColumns } from "@/components/mosque/columns/mosqqueColumn";
 import Button from "@/components/UI/Button";
 import DataTable from "@/components/UI/data-table/DataTable";
 import { useToast } from "@/context/toast";
-import { getMosqueColumns } from "@/lib/features/mosque/columns/mosqqueColumn";
 import { deleteMosque, getMosques } from "@/lib/features/mosque/services/mosque.service";
-import { Mosque, PaginationMeta } from "@/lib/features/mosque/types";
-import {  Loader, Loader2, MessagesSquare,  TableProperties } from "lucide-react";
-import { ElementType, useEffect, useState } from "react";
+import { Mosque } from "@/lib/features/mosque/types";
+import { PaginationMeta } from "@/lib/types";
+import {  Loader, MessagesSquare,  TableProperties } from "lucide-react";
+import {  useEffect, useState } from "react";
 
 
 

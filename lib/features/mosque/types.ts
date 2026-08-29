@@ -1,9 +1,21 @@
+export interface sendMosque{
+  name: string;
+  managerEmail: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+};
+
 export interface Mosque {
   id: string;
   name: string;
-  manager?: {
+  manager: {
     id: string;
     name: string;
+    email: string;
+    phoneNumber: string;
+    createdAt: string;
   };
 
   location: {
@@ -15,16 +27,10 @@ export interface Mosque {
   updatedAt: string;
 }
 
-export interface PaginationMeta {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  meta: PaginationMeta;
+export interface MosqueManager {
+  id: string;
+  name: string;
+  manager:{
+    id: string;
+  }
 }

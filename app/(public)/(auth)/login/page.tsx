@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { login } from "@/lib/features/auth/services/auth.service";
 import Input from "@/components/UI/Input";
+import { ROLE_CONFIG } from "@/lib/features/auth/roles";
 
 
 export default function LoginForm() {
@@ -50,9 +51,11 @@ export default function LoginForm() {
 
       localStorage.setItem("token", response.token);
 
-      console.log("Login success:", response);
+      const firstRole = response.role[0];
 
-      router.push("/admin");
+      const redirectPath = ROLE_CONFIG[firstRole].href;
+
+      router.push(redirectPath);
     } catch (error) {
       console.error("Login error:", error);
 

@@ -1,7 +1,7 @@
 import { TableColumn } from "@/components/UI/data-table/types";
-import { Mosque } from "../types";
+import { Mosque } from "@/lib/features/mosque/types";
 import { formatDateTime } from "@/lib/utils/format-date";
-import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
+import { ChevronLeft, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 export function getMosqueColumns(
@@ -40,10 +40,10 @@ export function getMosqueColumns(
       render: (mosque) => (
         <div className="flex items-center gap-3">
           <Link
-            href={`/admin/mosques/${mosque.id}/details`}
-            className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-slate-600 transition hover:bg-gray-200"
+            href={`/admin/mosques/${mosque.id}`}
+            className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-slate-600 transition hover:bg-gray-200 hover:bg-primary-400"
           >
-            <EllipsisVertical size={19} />
+            <ChevronLeft   size={19} />
           </Link>
 
           <Link

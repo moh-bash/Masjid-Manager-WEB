@@ -19,7 +19,7 @@ export default function SidebarNavItem({
   const Icon = item.icon;
 
   const isActive =
-    pathname === item.href || pathname.split("/").slice(0, 3).join("/") === item.href;
+    pathname === item.href ||  pathname.startsWith(`${item.href}/`);
 
   return (
     <Link

@@ -11,13 +11,14 @@ import {
 import SidebarProfile from "./SidebarProfile";
 import SidebarNav from "./SidebarNav";
 import SidebarLogoutButton from "./SidebarLogoutButton";
+import { Role } from "@/lib/features/auth/types";
 
 interface SidebarProps {
   user: SidebarUser;
   roles: SidebarRole[];
-  activeRoleId: string;
+  activeRoleId: Role;
   items: SidebarNavItem[];
-  onRoleChange: (roleId: string) => void;
+  onRoleChange: (roleId: Role) => void;
   onLogout: () => void;
   isMobileOpen: boolean;
   onClose: () => void;
