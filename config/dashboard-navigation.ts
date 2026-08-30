@@ -20,7 +20,7 @@ export function dashboardNavigation(
   const mosqueId =
     segments[0] === "mosque"
       ? segments[1]
-      : undefined;
+      : "undefined";
 
   const circleId =
     segments[0] === "teacher"
@@ -35,26 +35,31 @@ export function dashboardNavigation(
   return {
     SYSTEM_ADMIN: [
       {
+        id: 1,
         label: "لوحة التحكم",
         href: "/admin",
         icon: LayoutDashboard,
       },
       {
+        id: 2,
         label: "المساجد",
         href: "/admin/mosques",
         icon: Building2,
       },
       {
+        id: 3,
         label: "المستخدمين",
         href: "/admin/users",
         icon: Users,
       },
       {
+        id: 4,
         label: "التقارير",
         href: "/admin/reports",
         icon: ClipboardList,
       },
       {
+        id: 5,
         label: "الإعدادات",
         href: "/admin/settings",
         icon: Settings,
@@ -63,63 +68,69 @@ export function dashboardNavigation(
 
     MOSQUE_MANAGER: [
       {
+        id: 6,
         label: "لوحة التحكم",
         href: mosqueId ? `/mosque/${mosqueId}` : "/mosque",
         icon: LayoutDashboard,
       },
       {
+        id: 7,
         label: "الحلقات",
         href: mosqueId
           ? `/mosque/${mosqueId}/circles`
-          : "/mosque",
+          : "/",
         icon: ClipboardList,
       },
       {
+        id: 8,
         label: "الطلاب",
         href: mosqueId
           ? `/mosque/${mosqueId}/students`
-          : "/mosque",
+          : "/",
         icon: Users,
       },
       {
+        id: 9,
         label: "الإعدادات",
         href: mosqueId
           ? `/mosque/${mosqueId}/settings`
-          : "/mosque",
+          : "/",
         icon: Settings,
       },
     ],
 
     CIRCLE_TEACHER: [
       {
+        id: 10,
         label: "لوحة التحكم",
         href: circleId
           ? `/teacher/${circleId}`
-          : "/teacher",
+          : "/",
         icon: LayoutDashboard,
       },
       {
+        id: 11,
         label: "طلابي",
         href: circleId
           ? `/teacher/${circleId}/students`
-          : "/teacher",
+          : "/",
         icon: Users,
       },
       {
+        id: 12,
         label: "التقارير",
         href: circleId
           ? `/teacher/${circleId}/reports`
-          : "/teacher",
+          : "/",
         icon: ClipboardList,
       },
     ],
 
     PARENT: [
       {
+        id: 13,
         label: "الرئيسية",
-        href: studentId
-          ? `/parent/${studentId}`
-          : "/parent",
+        href: "/parent",
         icon: Home,
       },
     ],
