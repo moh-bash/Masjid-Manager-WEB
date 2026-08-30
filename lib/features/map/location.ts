@@ -1,4 +1,4 @@
-import type { LocationCoordinates } from "@/components/UI/map/types";
+import type { LocationCoordinates } from "@/components/map/types";
 
 export const DEFAULT_LOCATION: LocationCoordinates = {
   lat: 33.51018757,
