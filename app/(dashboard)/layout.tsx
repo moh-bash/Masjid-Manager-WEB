@@ -3,6 +3,8 @@ import { ROLE_CONFIG } from "@/lib/features/auth/roles";
 import { currentUser } from "@/lib/features/auth/services/auth.service";
 import { User } from "@/lib/features/auth/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardLayout({
   children, params
 }: {
