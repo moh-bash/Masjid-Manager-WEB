@@ -2,6 +2,7 @@ import { Role } from "@/lib/features/auth/types";
 import { LucideIcon } from "lucide-react";
 
 export interface SidebarNavItem {
+  id?: number;
   label: string;
   href: string;
   icon: LucideIcon;

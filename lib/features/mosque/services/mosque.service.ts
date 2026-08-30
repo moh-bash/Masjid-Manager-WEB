@@ -11,6 +11,7 @@ return response.data;
 
 export async function getMosques(page: number): Promise<PaginatedResponse<Mosque>> {
     const response = await apiClient.get<PaginatedResponse<Mosque> >(`/mosques?page=${page}&limit=8`);
+    console.log("getMosques response:", response.data);
     return response.data;
 }
 

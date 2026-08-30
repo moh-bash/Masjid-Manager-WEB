@@ -6,10 +6,9 @@ import { User } from "@/lib/features/auth/types";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({
-  children, params
+  children,
 }: {
   children: React.ReactNode;
-   params: {  };
 }) {
   let userMe: User | null = null;
 
@@ -24,8 +23,8 @@ export default async function DashboardLayout({
   }
 
   const user = {
-    name: userMe.name || "John Doe",
-    image: "/images/profile.jpg",
+    name: userMe.name || "مستخدم",
+    image:  "/images/profile.jpg",
   };
 
   const userRoles = userMe.role.map((role) => ({

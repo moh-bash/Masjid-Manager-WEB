@@ -8,8 +8,7 @@ apiClient.interceptors.request.use(async (config) => {
   let token;
 
   if (typeof window !== "undefined") {
-    const match = document.cookie.match(/(^|;)\s*token\s*=\s*([^;]+)/);
-    token = match ? match[2] : null;
+   token = localStorage.getItem("token");
   } else {
     const { cookies } = await import("next/headers");
     const cookieStore = await cookies();
