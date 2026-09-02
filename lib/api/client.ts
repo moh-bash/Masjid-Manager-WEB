@@ -15,6 +15,11 @@ apiClient.interceptors.request.use(async (config) => {
     token = cookieStore.get("token")?.value;
   }
 
+  if(!token) {
+    const { redirect } = await import("next/navigation");
+    redirect("/login");
+  }
+
   if (token) {
     config.headers.authorization = `Bearer ${token}`;
   }

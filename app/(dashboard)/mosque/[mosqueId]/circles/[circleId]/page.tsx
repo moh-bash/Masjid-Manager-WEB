@@ -26,9 +26,11 @@ export default async function CircleDetailsPage({
   const { mosqueId, circleId } = await params;
 
   let circle: Circle;
+  let availableSeats: number | null = null;
 
   try {
     circle = await getCircleById(circleId);
+    availableSeats = circle.maxStudents - circle.activeStudentsCount;
   } catch (error) {
     console.error("Error fetching circle details:", error);
     notFound();
@@ -182,12 +184,12 @@ export default async function CircleDetailsPage({
             />
             <StatCard
               title="عدد الطلاب الحالي"
-              value="--"
-              description="سيتم ربطها بجدول الطلاب لاحقاً"
+              value={circle.activeStudentsCount.toString()}
+              description="عدد الطلاب النشطين  في الحلقة "
             />
             <StatCard
               title="الأماكن الشاغرة"
-              value="--"
+              value={ availableSeats !== null ? availableSeats.toString() : "غير محدد" }
               description="سيتم حسابها تلقائياً لاحقاً"
             />
           </div>

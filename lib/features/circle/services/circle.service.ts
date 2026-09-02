@@ -1,6 +1,6 @@
 import apiClient from "@/lib/api/client";
 import { PaginatedResponse } from "@/lib/types";
-import { Circle } from "../types";
+import { Circle, CircleTeacher } from "../types";
 
 export interface CreateCirclePayload {
   name: string;
@@ -16,6 +16,11 @@ export type UpdateCirclePayload = Partial<CreateCirclePayload>;
 export async function getMosqueCircles(mosqueId: string, page: number): Promise<PaginatedResponse<Circle>> {
   const response = await apiClient.get<PaginatedResponse<Circle>>(`/circles/mosque/${mosqueId}?page=${page}&limit=10`);
   return response.data;
+}
+
+export async function getTeacherCircles() : Promise<CircleTeacher[]> {
+ const response = await apiClient.get<CircleTeacher[]>(`/circles/me`);
+ return response.data;
 }
 
 export async function addCircle(data: CreateCirclePayload): Promise<Circle> {

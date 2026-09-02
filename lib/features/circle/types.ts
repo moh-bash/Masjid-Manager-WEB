@@ -16,4 +16,14 @@ export interface Circle {
   };
   createdAt: string;
   updatedAt: string;
+  activeStudentsCount: number;
+  historicalStudentsCount: number;
+}
+
+export interface CircleTeacher {
+  id: string;
+  name: string;
+  teacher:{
+    id: string;
+  }
 }
