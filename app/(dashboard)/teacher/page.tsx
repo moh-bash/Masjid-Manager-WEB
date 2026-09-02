@@ -29,6 +29,7 @@ export default async function TeacherDashboard() {
 
   // Empty State
   return (
+<<<<<<< HEAD
     <div className="flex h-screen flex-col items-center justify-center gap-4 text-center">
       لست معيناً كمعلم في أي حلقة حتى الآن.
       <br />
@@ -38,3 +39,8 @@ export default async function TeacherDashboard() {
     </div>
   );
 }
+=======
+    <div>Teacher page</div>
+  )
+}
+>>>>>>> 1ba5bae64e6cb2672ab12fcb23f3ec2e8bedd01a
