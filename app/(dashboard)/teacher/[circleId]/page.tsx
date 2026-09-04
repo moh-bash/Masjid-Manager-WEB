@@ -3,6 +3,6 @@ import React from 'react'
 export default async function page({params}: {params: {circleId : string}}) {
     const {circleId} = await params;
   return (
-    <div>circle id : {circleId}</div>
+    <div>circle id  : todo this page{circleId}</div>
   )
 }
