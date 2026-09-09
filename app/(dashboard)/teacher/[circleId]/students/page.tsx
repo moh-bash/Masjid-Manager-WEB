@@ -1,11 +1,10 @@
+import DashboardPage from "@/components/dashboard/DashboardPage";
 import StudentCard from "@/components/student/StudentCard";
+import Button from "@/components/UI/Button";
 import { getStudentsByCircle } from "@/lib/features/student/services/student.service";
-import { ChevronRight, Search } from "lucide-react";
-import Link from "next/link";
+import { Search } from "lucide-react";
 
-export default async function CircleStudentsPage({
-    params,
-}: {
+export default async function CircleStudentsPage({ params }: {
     params: { circleId: string };
 }) {
     const { circleId } = await params;
@@ -13,12 +12,21 @@ export default async function CircleStudentsPage({
     const students = studentsData.data;
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-24 font-sans" dir="rtl">
-
+        <DashboardPage>
             {/* Header */}
-             
-            <main className="px-5 mt-6 max-w-2xl mx-auto">
-
+            <header>
+                <div className="py-4 flex items-center justify-between">
+                    <h1 className="text-lg font-semibold text-gray-800">الطلاب</h1>
+                    <Button
+                        size="md"
+                        href={`/teacher/${circleId}/students/add`}
+                        className="bg-[#3eb1d3] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#36a0c0] transition-colors"
+                    >
+                        إضافة طالب جديد
+                    </Button>
+                </div>
+            </header>
+                        <div>
                 {/* Search Bar */}
                 <div className="relative mb-6">
                     <input
@@ -45,17 +53,7 @@ export default async function CircleStudentsPage({
                         </div>
                     )}
                 </div>
-            </main>
-
-            {/* Floating Add Button */}
-            <div className="fixed bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-gray-50 via-gray-50 to-transparent">
-                <div className="max-w-2xl mx-auto">
-                    <button className="w-full bg-[#3eb1d3] hover:bg-[#349bb8] text-white font-bold py-4 rounded-xl shadow-lg transition-colors text-lg">
-                        إضافة طالب جديد
-                    </button>
-                </div>
             </div>
-
-        </div>
+        </DashboardPage>
     );
 }

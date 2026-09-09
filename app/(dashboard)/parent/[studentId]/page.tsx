@@ -68,12 +68,6 @@ export default async function StudentDetailsPage({
             تفاصيل الطالب
           </h1>
         </div>
-        <Link
-          href={`/teacher/${circleId}/students/${student.id}/edit`}
-          className="p-2 bg-primary-400/25 rounded-lg shadow-md hover:bg-primary-400 transition-colors cursor-pointer"
-        >
-          <Edit className="text-primary-700" size={20} />
-        </Link>
       </div>
 
       {/* Basic Information */}
@@ -116,10 +110,6 @@ export default async function StudentDetailsPage({
         </div>
       </section>
 
-      <div className="my-6">
-        <StudentLinkBox linkCode={student.linkCode} />
-      </div>
-
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Active Circle Information */}
         <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
@@ -147,14 +137,6 @@ export default async function StudentDetailsPage({
                 label="تاريخ الانضمام"
                 value={new Date(student.activeCircle.joinDate).toLocaleDateString("ar-SA", dateOptions)}
               />
-              <div className="pt-2">
-                <Link
-                  href={`/teacher/${circleId}/circles/${student.activeCircle.id}`}
-                  className="text-sm font-medium text-indigo-600 hover:text-indigo-800 underline underline-offset-4"
-                >
-                  عرض تفاصيل الحلقة
-                </Link>
-              </div>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-6 text-center bg-gray-50 rounded-xl border border-gray-100">

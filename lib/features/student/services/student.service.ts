@@ -1,4 +1,4 @@
-import { Student, PaginatedStudentsResponse } from "../types";
+import { Student, PaginatedStudentsResponse, LinkedChild } from "../types";
 import { CreateStudentData, UpdateStudentData, TransferStudentData } from "../schema/students.schema";
 import apiClient from "@/lib/api/client";
 
@@ -66,4 +66,15 @@ export const transferStudent = async (
 export const deleteStudent = async (studentId: string): Promise<{ message: string }> => {
   const response = await apiClient.delete(`/students/${studentId}`);
   return response.data;
+};
+
+
+export const getMyChildren = async (): Promise<LinkedChild[]> => {
+  try {
+    const response = await apiClient.get("/students/my-children");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching my children:", error);
+    throw error;
+  }
 };

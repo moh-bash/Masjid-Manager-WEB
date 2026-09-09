@@ -37,7 +37,6 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
   const router = useRouter();
 
   const mode = initialData ? "edit" : "create";
-  const returnUrl = `/mosque/${mosqueId}/students`;
 
   useEffect(() => {
     async function fetchCircles() {
@@ -46,10 +45,12 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
         const response = await getMosqueCircles(mosqueId, 1);
         setCircles(response.data);
       } catch (error) {
-        showToast({
-          message: "تعذر جلب حلقات المسجد. يرجى المحاولة لاحقاً.",
-          type: "danger",
-        });
+        if (!circleIdProp) {
+          showToast({
+            message: "تعذر جلب حلقات المسجد. يرجى المحاولة لاحقاً.",
+            type: "danger",
+          });
+        }
       } finally {
         setIsLoadingCircles(false);
       }
@@ -103,7 +104,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
         showToast({ message: "تم إضافة الطالب بنجاح", type: "success" });
       }
 
-      router.push(returnUrl);
+      router.back();
     } catch (error: any) {
       setErrorMessage(
         error.response?.data?.message || "حدث خطأ أثناء حفظ بيانات الطالب"
@@ -130,7 +131,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
             )}
           </Button>
 
-          <Button type="button" variant="outline" size="md" href={returnUrl}>
+          <Button type="button" variant="outline" size="md" onClick={() => router.back()}>
             إلغاء
           </Button>
         </div>

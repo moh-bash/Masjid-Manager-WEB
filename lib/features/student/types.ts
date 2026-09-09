@@ -28,6 +28,16 @@ export interface Student {
   age: number;
   activeCircle: ActiveCircle | null;
   pastCircles?: PastCircle[]; 
+  
+  parent?: {
+    id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+  } | null;
+  
+  linkCode?: string | null; 
+
   createdAt: string;
   updatedAt: string;
 }
@@ -42,4 +52,13 @@ export interface PaginatedStudentsResponse {
     hasNextPage: boolean;
     hasPreviousPage: boolean;
   };
+}
+
+
+export interface LinkedChild {
+  id: string;
+  name: string;
+  mosqueName: string;
+  circleName: string;
+  teacherName: string;
 }

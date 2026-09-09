@@ -9,7 +9,7 @@ export default async function TeacherCircleLayout({
   const circles = await getTeacherCircles();
 
   return (
-    <div className="min-h-screen">
+    <div>
       <header>
         <CircleSwitcher circles={circles} />
       </header>
