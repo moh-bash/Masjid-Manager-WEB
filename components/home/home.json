@@ -1,0 +1,114 @@
+{
+  "hero": {
+    "eyebrow": "مسجدي",
+    "title": "القرآن والعلم في رحاب المسجد",
+    "description": "منظومة تجمع المساجد وحلقات تحفيظ القرآن والعلوم الشرعية، وتبقي ولي الأمر قريبًا من رحلة أبنائه التعليمية.",
+    "primaryButton": {
+      "label": "تسجيل الدخول",
+      "href": "/login"
+    },
+    "secondaryButton": {
+      "label": "استكشف مساجدنا",
+      "href": "/mosques"
+    }
+  },
+  "stats": [
+    {
+      "id": "mosques",
+      "label": "مسجدًا",
+      "value": 8
+    },
+    {
+      "id": "circles",
+      "label": "حلقة",
+      "value": 24
+    },
+    {
+      "id": "students",
+      "label": "طالبًا",
+      "value": 356
+    },
+    {
+      "id": "teachers",
+      "label": "معلمًا",
+      "value": 32
+    }
+  ],
+  "mosques": [
+    {
+      "id": "mosque-1",
+      "name": "مسجد النور",
+      "location": "جسرين",
+      "description": "مسجد يحتضن حلقات لتحفيظ القرآن وتعليم العلوم الشرعية.",
+      "image": "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=1200&q=80",
+      "circlesCount": 4,
+      "studentsCount": 67
+    },
+    {
+      "id": "mosque-2",
+      "name": "مسجد التقوى",
+      "location": "جسرين",
+      "description": "بيئة تعليمية تجمع بين حفظ كتاب الله والتعلم الشرعي.",
+      "image": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80",
+      "circlesCount": 3,
+      "studentsCount": 51
+    },
+    {
+      "id": "mosque-3",
+      "name": "مسجد الرحمن",
+      "location": "جسرين",
+      "description": "حلقات قرآنية وبرامج تعليمية تهتم بالناشئة.",
+      "image": "https://images.unsplash.com/photo-1564769625392-651b2d6b1e1d?auto=format&fit=crop&w=1200&q=80",
+      "circlesCount": 5,
+      "studentsCount": 84
+    }
+  ],
+  "parentFeatures": [
+    {
+      "id": "attendance",
+      "title": "متابعة الحضور",
+      "description": "الاطلاع على انتظام ابنك في الحلقة ومتابعة الحضور والغياب."
+    },
+    {
+      "id": "progress",
+      "title": "متابعة التقدم",
+      "description": "معرفة مستوى ابنك وما يخص رحلته في حفظ القرآن والتعلم."
+    },
+    {
+      "id": "circle",
+      "title": "معرفة الحلقة",
+      "description": "الاطلاع على الحلقة التي ينتمي إليها الطالب والمعلم المسؤول عنها."
+    },
+    {
+      "id": "students",
+      "title": "متابعة الأبناء",
+      "description": "الوصول إلى بيانات الأبناء المرتبطين بحساب ولي الأمر."
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-1",
+      "title": "فضل تلاوة القرآن الكريم",
+      "excerpt": "القرآن الكريم خير ما يأنس به المسلم، وتلاوته من أجلّ الأعمال التي يتقرب بها العبد إلى الله.",
+      "image": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80",
+      "source": "القرآن الكريم",
+      "sourceUrl": "https://quran.com/"
+    },
+    {
+      "id": "post-2",
+      "title": "العناية بتعليم الأبناء",
+      "excerpt": "من أعظم ما يقدمه الوالدان لأبنائهما أن يعيناهما على تعلم كتاب الله وما ينفعهما في دينهما ودنياهما.",
+      "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
+      "source": "محتوى تربوي",
+      "sourceUrl": "https://quran.com/"
+    },
+    {
+      "id": "post-3",
+      "title": "مجالس العلم والذكر",
+      "excerpt": "المسجد ليس مكانًا للصلاة فحسب، بل هو موضع للقرآن والعلم والذكر والتربية.",
+      "image": "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1200&q=80",
+      "source": "محتوى إيماني",
+      "sourceUrl": "https://sunnah.com/"
+    }
+  ]
+}
