@@ -41,11 +41,6 @@ export default function HeroSection({ data }: HeroSectionProps) {
 
           {/* Content */}
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700">
-              <BookOpen className="h-4 w-4" />
-              {data.eyebrow}
-            </div>
-
             <h1 className="max-w-3xl text-4xl font-bold leading-[1.35] tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
               {data.title}
             </h1>
@@ -96,13 +91,13 @@ export default function HeroSection({ data }: HeroSectionProps) {
               </div>
             </div>
 
-            <div className="absolute -bottom-5 -right-5 hidden rounded-2xl border border-neutral-100 bg-white px-5 py-4 shadow-xl sm:block">
+            <div className="absolute -bottom-10 -right-5 hidden rounded-2xl border border-neutral-100 bg-white px-5 py-4 shadow-xl sm:block">
               <p className="text-xs text-neutral-500">
-                حلقات القرآن والعلوم الشرعية
+                منصة الطالب الالكترونية
               </p>
 
               <p className="mt-1 font-bold text-neutral-900">
-                معًا في رحاب المسجد
+                في بلدة جسرين
               </p>
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use server";
-import apiClient from "@/lib/api/client";
+import apiClient, { api } from "@/lib/api/client";
 
 import type {
   RegisterData,
@@ -12,10 +12,11 @@ import type {
 } from "../types";
 import { PaginatedResponse } from "@/lib/types";
 import { cookies } from "next/headers";
+import axios from "axios";
 
 
 export async function register( data: RegisterData): Promise<LoginResponse> {
-  const response = await apiClient.post<LoginResponse>( "/auth/register",data );
+  const response = await api.post<LoginResponse>( "/auth/register",data );
   const cookieStore = await cookies();
   cookieStore.set({
       name: 'token',
@@ -31,7 +32,7 @@ export async function register( data: RegisterData): Promise<LoginResponse> {
 
 export async function login( data: LoginData ): Promise<LoginResponse> {
   try{
-  const response = await apiClient.post<LoginResponse>( "/auth/login",data );
+  const response = await api.post<LoginResponse>( "/auth/login",data );
   const cookieStore = await cookies();
   cookieStore.set({
       name: 'token',

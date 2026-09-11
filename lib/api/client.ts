@@ -27,4 +27,11 @@ apiClient.interceptors.request.use(async (config) => {
   return config;
 });
 
+
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+export { api };
+
 export default apiClient;

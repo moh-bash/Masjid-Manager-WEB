@@ -10,6 +10,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import Button from "../UI/Button";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   {
@@ -21,6 +22,10 @@ const navLinks = [
     href: "/posts",
   },
   {
+    name: "المساجد",
+    href: "/mosques",
+  },
+  {
     name: "عن النظام",
     href: "/about",
   },
@@ -28,6 +33,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const path = usePathname();
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
@@ -60,7 +66,11 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-md font-medium text-slate-600 transition hover:bg-slate-100 hover:text-primary-600"
+              className={`rounded-lg px-4 py-2 text-md font-medium transition hover:bg-slate-100 hover:text-primary-600 ${
+                path === link.href || path.startsWith(`${link.href}/`)
+                  ? "bg-primary-50 text-primary-600 border border-primary-800"
+                  : "text-slate-600"
+              }`}
             >
               {link.name}
             </Link>
@@ -100,7 +110,11 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-emerald-600"
+                className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-slate-50 hover:text-primary-600 ${
+                  path === link.href || path.startsWith(`${link.href}/`)
+                    ? "bg-primary-50 text-primary-600"
+                    : "text-slate-700"
+                }`}
               >
                 {link.name}
                 <ChevronLeft size={18} />
