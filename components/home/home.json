@@ -8,8 +8,8 @@
       "href": "/login"
     },
     "secondaryButton": {
-      "label": "استكشف مساجدنا",
-      "href": "/mosques"
+      "label": "انشاء حساب",
+      "href": "/register"
     }
   },
   "stats": [

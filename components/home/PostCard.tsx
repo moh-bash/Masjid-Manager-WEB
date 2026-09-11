@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   ExternalLink,
 } from "lucide-react";
+import Image from "next/image";
 
 interface PostCardProps {
   post: {
@@ -23,7 +24,8 @@ export default function PostCard({
     <article className="group overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary-100 hover:shadow-xl hover:shadow-neutral-900/5">
       {/* Image */}
       <div className="relative h-60 overflow-hidden">
-        <img
+        <Image
+         fill={true}
           src={post.image}
           alt={post.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

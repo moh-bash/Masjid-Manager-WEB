@@ -4,6 +4,7 @@ import {
   BookOpenCheck,
   CheckCircle2,
 } from "lucide-react";
+import Image from "next/image";
 
 interface ParentFeature {
   id: string;
@@ -29,7 +30,9 @@ export default function ParentSection({
 
             <div className="relative overflow-hidden rounded-[2rem] bg-primary-900 p-3 shadow-2xl">
               <div className="overflow-hidden rounded-[1.5rem]">
-                <img
+                <Image
+                  width={520}
+                  height={520}
                   src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=85"
                   alt="القرآن الكريم"
                   className="h-[520px] w-full object-cover"

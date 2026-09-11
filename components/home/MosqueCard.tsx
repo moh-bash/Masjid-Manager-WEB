@@ -5,6 +5,7 @@ import {
   MapPin,
   Users,
 } from "lucide-react";
+import Image from "next/image";
 
 interface MosqueCardProps {
   mosque: {
@@ -25,9 +26,12 @@ export default function MosqueCard({
     <article className="group overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary-100 hover:shadow-xl hover:shadow-neutral-900/5">
       {/* Image */}
       <div className="relative h-56 overflow-hidden">
-        <img
+        <Image
           src={mosque.image}
           alt={mosque.name}
+          fill
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
