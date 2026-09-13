@@ -1,19 +1,27 @@
 import axios from "axios";
 
-const apiClient = axios.create({
+// public 
+export const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+// protected
+export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 apiClient.interceptors.request.use(async (config) => {
-  let token;
+    let token: string | null;
 
-  if (typeof window !== "undefined") {
+   if (typeof window !== "undefined") {
    token = localStorage.getItem("token");
   } else {
     const { cookies } = await import("next/headers");
     const cookieStore = await cookies();
-    token = cookieStore.get("token")?.value;
+    token = cookieStore.get("token")?.value ?? null;
   }
+
+
 
   if(!token) {
     const { redirect } = await import("next/navigation");
@@ -25,13 +33,17 @@ apiClient.interceptors.request.use(async (config) => {
   }
 
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
-
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-});
-
-export { api };
-
-export default apiClient;
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);

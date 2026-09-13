@@ -51,7 +51,7 @@ export default function ParentSection({
                     </p>
 
                     <p className="mt-1 text-xs text-neutral-500">
-                      كن قريبًا من رحلة ابنك
+                      كن قريباٌ من رحلة ابنك
                     </p>
                   </div>
                 </div>

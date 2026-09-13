@@ -1,24 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import PostCard from "./PostCard";
-
-interface Post {
-  id: string;
-  title: string;
-  excerpt: string;
-  image: string;
-  source: string;
-  sourceUrl: string;
-  date?: string;
-}
-
-interface PostsSectionProps {
-  posts: Post[];
-}
+import { Post } from "@/lib/features/post/types";
 
 export default function PostsSection({
   posts,
-}: PostsSectionProps) {
+}: { posts: Post[] }) {
   return (
     <section className="bg-white px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -34,8 +21,7 @@ export default function PostsSection({
             </h2>
 
             <p className="mt-4 max-w-2xl leading-7 text-neutral-500">
-              وقفات ومحتويات نافعة نشاركها مع زوار الموقع،
-              لتبقى أبواب الخير والعلم مفتوحة للجميع.
+              وقفات ومحتويات نافعة نشاركها معكم 
             </p>
           </div>
 

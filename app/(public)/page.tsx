@@ -4,9 +4,12 @@ import MosquesSection from "@/components/home/MosquesSection";
 import ParentSection from "@/components/home/ParentSection";
 import PostsSection from "@/components/home/PostsSection";
 import StatsSection from "@/components/home/StatsSection";
+import { getAllPosts } from "@/lib/features/post/services/posts.service";
 
-export default function HomePage() {
+export default async function HomePage() {
   const mosques = homeData.mosques.slice(0, 3);
+    const { data } = await getAllPosts();
+  
   return (
     <div
       dir="rtl"
@@ -21,7 +24,7 @@ export default function HomePage() {
 
         <ParentSection features={homeData.parentFeatures} />
 
-        <PostsSection posts={homeData.posts} />
+        <PostsSection posts={data.slice(0, 3)} />
       </main>
     </div>
   );

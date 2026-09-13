@@ -3,6 +3,7 @@ import {
   ClipboardList,
   Home,
   LayoutDashboard,
+  Paperclip,
   Settings,
   Users,
 } from "lucide-react";
@@ -51,6 +52,12 @@ export function dashboardNavigation(
         label: "المستخدمين",
         href: "/admin/users",
         icon: Users,
+      },
+      {
+        id: 33,
+        label: "المقالات",
+        href: "/admin/posts",
+        icon: Paperclip,
       },
       {
         id: 4,

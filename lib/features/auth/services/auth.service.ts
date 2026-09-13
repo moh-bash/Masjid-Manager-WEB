@@ -1,5 +1,4 @@
 "use server";
-import apiClient, { api } from "@/lib/api/client";
 
 import type {
   RegisterData,
@@ -12,7 +11,7 @@ import type {
 } from "../types";
 import { PaginatedResponse } from "@/lib/types";
 import { cookies } from "next/headers";
-import axios from "axios";
+import { api, apiClient } from "@/lib/api/client";
 
 
 export async function register( data: RegisterData): Promise<LoginResponse> {

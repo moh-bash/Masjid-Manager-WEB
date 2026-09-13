@@ -35,8 +35,7 @@ export default function MosquesSection({
             </h2>
 
             <p className="mt-4 max-w-2xl leading-7 text-neutral-500">
-              مساجد تحتضن حلقات القرآن وتعليم العلوم الشرعية، وتفتح أبوابها
-              للعلم والذكر والتربية.
+              مساجد تحتضن حلقات القرآن    
             </p>
           </div>
 
