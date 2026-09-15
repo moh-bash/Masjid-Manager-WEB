@@ -68,7 +68,7 @@ export default function PostForm({ initialData }: PostFormProps) {
         await createPost(formData);
       }
 
-      router.push('/dashboard/posts');
+      router.push('/admin/posts');
       router.refresh();
 
     } catch (err: any) {

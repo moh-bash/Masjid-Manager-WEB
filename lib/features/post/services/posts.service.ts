@@ -1,8 +1,16 @@
 import { api, apiClient } from "@/lib/api/client";
-import { GetPostsResponse, Post } from "../types";
+import { PaginatedResponse } from "@/lib/types";
+import { Post } from "../types";
 
-export async function getAllPosts(): Promise<GetPostsResponse> {
-  const response = await api.get<GetPostsResponse>(`/posts`);
+export async function getAllPosts(page?: number): Promise<PaginatedResponse<Post>> {
+  const endpoint = page === undefined ? "/posts" : `/posts?page=${page}&limit=10`;
+  const response = await api.get<PaginatedResponse<Post>>(endpoint);
+  return response.data;
+}
+
+export async function getPostsForAdmin(page?: number): Promise<PaginatedResponse<Post>> {
+  const endpoint = page === undefined ? "/posts/admin" : `/posts/admin?page=${page}&limit=10`;
+  const response = await apiClient.get<PaginatedResponse<Post>>(endpoint);
   return response.data;
 }
 
@@ -21,6 +29,6 @@ export async function updatePostById(id: string, formData: FormData): Promise<Po
   return response.data;
 }
 
-export async function deletePostById(id: string): Promise<void> {
+export async function   deletePostById(id: string): Promise<void> {
   await apiClient.delete(`/posts/${id}`);
 }

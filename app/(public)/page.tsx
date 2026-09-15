@@ -1,15 +1,15 @@
+import { Suspense } from "react";
 import HeroSection from "@/components/home/HeroSection";
 import homeData from "@/components/home/home.json"
 import MosquesSection from "@/components/home/MosquesSection";
 import ParentSection from "@/components/home/ParentSection";
-import PostsSection from "@/components/home/PostsSection";
+import PostsSectionAsync from "@/components/home/PostsSectionAsync";
+import PostsSectionSkeleton from "@/components/home/PostsSectionSkeleton";
 import StatsSection from "@/components/home/StatsSection";
-import { getAllPosts } from "@/lib/features/post/services/posts.service";
 
 export default async function HomePage() {
   const mosques = homeData.mosques.slice(0, 3);
-    const { data } = await getAllPosts();
-  
+
   return (
     <div
       dir="rtl"
@@ -24,7 +24,9 @@ export default async function HomePage() {
 
         <ParentSection features={homeData.parentFeatures} />
 
-        <PostsSection posts={data.slice(0, 3)} />
+        <Suspense fallback={<PostsSectionSkeleton />}>
+          <PostsSectionAsync />
+        </Suspense>
       </main>
     </div>
   );

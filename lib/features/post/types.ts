@@ -8,7 +8,10 @@ export interface Post {
     excerpt?: string;
     image: string;
     isPublished?: boolean;
-    category: string | null;
+    category: {
+        id: string;
+        name: string;
+    } | null;
     categoryId: string | null;
     author: User;
     authorId: string;
