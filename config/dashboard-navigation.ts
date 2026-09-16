@@ -1,4 +1,5 @@
 import {
+  BookOpen,
   Building2,
   ClipboardList,
   Home,
@@ -130,6 +131,14 @@ export function dashboardNavigation(
           ? `/teacher/${circleId}/reports`
           : "/",
         icon: ClipboardList,
+      },
+      {
+        id: 14,
+        label: "التلاوة",
+        href: circleId
+          ? `/teacher/${circleId}/recitation`
+          : "/",
+        icon: BookOpen,
       },
     ],
 

@@ -10,6 +10,8 @@ export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+export default apiClient;
+
 apiClient.interceptors.request.use(async (config) => {
     let token: string | null;
 

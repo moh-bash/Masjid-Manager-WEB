@@ -27,7 +27,7 @@ export default function PostCard({ post, }: PostCardProps) {
 
         {post.category && (
           <div className="absolute bottom-4 right-4 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-neutral-600 backdrop-blur">
-            {post.category}
+            {post.category.name}
           </div>
         )
         }

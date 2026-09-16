@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import Button from "../UI/Button";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Logo from "@/public/images/logo.png.jpg";
 
 const navLinks = [
   {
@@ -93,8 +95,8 @@ export default function Navbar() {
               Masjidly
             </span>
           </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-sm transition hover:bg-primary-700">
-            <Building2 size={24} strokeWidth={2.2} />
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-sm transition hover:bg-primary-700">
+            <Image src={Logo} alt="Logo" width={44} height={50} />
           </div>
 
         </Link>

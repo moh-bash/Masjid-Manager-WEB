@@ -22,6 +22,10 @@ export default async function Page({ params }: PageProps) {
         <Button href={`/teacher/${circleId}/attendance/report`} variant="outline">
           تقرير الحضور والغياب
         </Button>
+
+        <Button href={`/teacher/${circleId}/recitation`} variant="outline">
+          سجل التلاوة
+        </Button>
       </div>
     </div>
   );
