@@ -34,6 +34,12 @@ export interface CircleSessionResponse {
   data?: null;
 }
 
+export interface CircleSession {
+  id: string;
+  date: string;
+  notes?: string;
+}
+
 export interface AttendanceReportResponse {
   circleName: string;
   dates: string[]; 

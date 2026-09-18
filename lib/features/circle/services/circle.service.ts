@@ -18,6 +18,11 @@ export async function getMosqueCircles(mosqueId: string, page: number): Promise<
   return response.data;
 }
 
+export async function getAllCircles(page: number = 1, limit: number = 100): Promise<PaginatedResponse<Circle>> {
+  const response = await apiClient.get<PaginatedResponse<Circle>>(`/circles?page=${page}&limit=${limit}`);
+  return response.data;
+}
+
 export async function getTeacherCircles() : Promise<CircleTeacher[]> {
  const response = await apiClient.get<CircleTeacher[]>(`/circles/me`);
  return response.data;

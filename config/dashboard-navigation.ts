@@ -61,6 +61,12 @@ export function dashboardNavigation(
         icon: Paperclip,
       },
       {
+        id: 34,
+        label: "التلاوات",
+        href: "/admin/recitations",
+        icon: BookOpen,
+      },
+      {
         id: 4,
         label: "التقارير",
         href: "/admin/reports",

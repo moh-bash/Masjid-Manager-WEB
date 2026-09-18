@@ -1,5 +1,10 @@
-import apiClient from "@/lib/api/client";import { AttendanceReportResponse, CircleSessionResponse, CreateAttendancePayload } from "../types";
-;
+import apiClient from "@/lib/api/client";
+import {
+  AttendanceReportResponse,
+  CircleSession,
+  CircleSessionResponse,
+  CreateAttendancePayload,
+} from "../types";
 
 
 export const getSessionByDate = async (
@@ -14,6 +19,18 @@ export const getSessionByDate = async (
     return response.data;
   } catch (error) {
     console.error("Error fetching session by date:", error);
+    throw error;
+  }
+};
+
+export const getCircleSessions = async (
+  circleId: string
+): Promise<CircleSession[]> => {
+  try {
+    const response = await apiClient.get(`/attendance/circle/${circleId}/sessions`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching circle sessions:", error);
     throw error;
   }
 };

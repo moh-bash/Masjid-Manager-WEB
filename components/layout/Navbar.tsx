@@ -95,7 +95,7 @@ export default function Navbar() {
               Masjidly
             </span>
           </div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-sm transition hover:bg-primary-700">
+          <div className="flex h-14 w-14 items-center justify-center text-white">
             <Image src={Logo} alt="Logo" width={44} height={50} />
           </div>
 

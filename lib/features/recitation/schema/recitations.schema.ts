@@ -47,3 +47,21 @@ export const createRecitationSchema = z
   });
 
 export type CreateRecitationData = z.infer<typeof createRecitationSchema>;
+
+export const recitationListQuerySchema = z.object({
+  page: z.coerce
+    .number()
+    .int("رقم الصفحة غير صالح")
+    .min(1, "رقم الصفحة غير صالح")
+    .catch(1),
+  studentId: z
+    .string()
+    .uuid("معرف الطالب غير صالح")
+    .optional()
+    .catch(undefined),
+  sessionId: z
+    .string()
+    .uuid("معرف الجلسة غير صالح")
+    .optional()
+    .catch(undefined),
+});

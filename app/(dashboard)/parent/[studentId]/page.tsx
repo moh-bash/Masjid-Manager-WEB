@@ -7,6 +7,10 @@ import {
   BookOpen,
   History,
   Heart,
+  BarChart3,
+  List,
+  Star,
+  Table2,
 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,8 +18,19 @@ import { notFound } from "next/navigation";
 import DashboardPage from "@/components/dashboard/DashboardPage";
 import { getStudentById } from "@/lib/features/student/services/student.service";
 import { Student, OrphanStatus } from "@/lib/features/student/types";
+import { getRecitations } from "@/lib/features/recitation/services/recitation.service";
+import { Recitation } from "@/lib/features/recitation/types";
+import {
+  calculateRecitationStats,
+  formatSessionDate,
+  getSuraName,
+  scoreInfo,
+} from "@/lib/features/recitation/recitation.helpers";
 import { InfoItem } from "@/components/UI/infoItem";
 import { StudentLinkBox } from "@/components/student/StudentLinkBox";
+import RecitationStatsVersionPage from "@/components/recitation/RecitationStatsVersion";
+import RecitationStatsVersion from "@/components/recitation/RecitationStatsVersion";
+import RecitationTableVersion from "@/components/recitation/RecitationTableVersion";
 
 const translateOrphanStatus = (status: OrphanStatus): string => {
   switch (status) {
@@ -36,7 +51,7 @@ export default async function StudentDetailsPage({
 }: {
   params: { circleId: string; studentId: string };
 }) {
-  const { circleId, studentId  } = await params;
+  const { circleId, studentId } = await params;
 
   let student: Student;
 
@@ -46,6 +61,20 @@ export default async function StudentDetailsPage({
     console.error("Error fetching student details:", error);
     notFound();
   }
+
+  let recitations: Recitation[] = [];
+  try {
+    const recitationsResponse = await getRecitations({
+      studentId,
+      page: 1,
+      limit: 10,
+    });
+    recitations = recitationsResponse.data ?? [];
+  } catch (error) {
+    console.error("Error fetching student recitations:", error);
+  }
+
+  const recitationStats = calculateRecitationStats(recitations);
 
   const dateOptions: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -71,7 +100,7 @@ export default async function StudentDetailsPage({
       </div>
 
       {/* Basic Information */}
-      <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
+      <section className="rounded-2xl mb-4 border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="mb-5 flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Info size={22} />
@@ -110,7 +139,7 @@ export default async function StudentDetailsPage({
         </div>
       </section>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 mb-4 lg:grid-cols-2">
         {/* Active Circle Information */}
         <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
           <div className="mb-5 flex items-center gap-3">
@@ -180,6 +209,81 @@ export default async function StudentDetailsPage({
           </div>
         </section>
       </div>
+
+      {/* Recitations */}
+      <section className="rounded-2xl border border-gray-200 mb-4 bg-white p-5 shadow-sm sm:p-6">
+        <div className="mb-5 flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary">
+            <BookOpen size={22} />
+          </div>
+          <div>
+            <h2 className="font-bold text-gray-900">سجل التلاوة</h2>
+            <p className="text-sm text-gray-500">
+              سجل مراجعة حفظ القرآن الكريم للطالب
+            </p>
+          </div>
+        </div>
+        <RecitationStatsVersion studentId={student.id} />
+        <div className="mt-6 border-t border-gray-100">
+        <RecitationTableVersion studentId={student.id} />
+        </div>
+
+        {/* {recitations.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-6 text-center bg-gray-50 rounded-xl border border-gray-100">
+            <BookOpen className="text-gray-400 mb-2" size={32} />
+            <p className="text-gray-600 font-medium">لا توجد تلاوات مسجلة لهذا الطالب بعد</p>
+            <p className="text-sm text-gray-500 mt-1">
+              ستظهر التلاوات هنا فور تسجيلها من قبل المعلم
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                  <BookOpen size={13} className="text-primary" />
+                  {recitationStats.total} تلاوة
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                  <Star size={13} className="text-amber-500" />
+                  متوسط الدرجة {recitationStats.averageScore}%
+                </span>
+                {recitationStats.lastRecitationDate && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-700">
+                    <CalendarDays size={13} className="text-primary" />
+                    آخر تلاوة {formatSessionDate(recitationStats.lastRecitationDate)}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/parent/${studentId}/1`}
+                  className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  <List size={13} />
+                  القائمة
+                </Link>
+                <Link
+                  href={`/parent/${studentId}/2`}
+                  className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  <Table2 size={13} />
+                  الجدول
+                </Link>
+                <Link
+                  href={`/parent/${studentId}/3`}
+                  className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  <BarChart3 size={13} />
+                  الإحصائيات
+                </Link>
+              </div>
+            </div>
+          </>
+        )} */}
+      </section>
+
 
       {/* Past Circles - Render only if exists and has data */}
       {student.pastCircles && student.pastCircles.length > 0 && (
