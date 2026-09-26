@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import { Post } from "@/lib/features/post/types";
 import { formatDate } from "@/lib/utils/format-date";
-import MarkdownViewer from "../UI/MarkdownViewer";
+import MarkdownViewer from "../../UI/MarkdownViewer";
 
 interface PostDetailsProps {
   post: Post

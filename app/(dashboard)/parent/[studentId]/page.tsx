@@ -31,6 +31,7 @@ import { StudentLinkBox } from "@/components/student/StudentLinkBox";
 import RecitationStatsVersionPage from "@/components/recitation/RecitationStatsVersion";
 import RecitationStatsVersion from "@/components/recitation/RecitationStatsVersion";
 import RecitationTableVersion from "@/components/recitation/RecitationTableVersion";
+import StudentPrayerTracker from "@/components/prayer/StudentPrayerTracker";
 
 const translateOrphanStatus = (status: OrphanStatus): string => {
   switch (status) {
@@ -210,6 +211,9 @@ export default async function StudentDetailsPage({
         </section>
       </div>
 
+      {/* prayer tracker */}
+      <StudentPrayerTracker studentId={studentId} />
+
       {/* Recitations */}
       <section className="rounded-2xl border border-gray-200 mb-4 bg-white p-5 shadow-sm sm:p-6">
         <div className="mb-5 flex items-center gap-3">
@@ -283,7 +287,6 @@ export default async function StudentDetailsPage({
           </>
         )} */}
       </section>
-
 
       {/* Past Circles - Render only if exists and has data */}
       {student.pastCircles && student.pastCircles.length > 0 && (

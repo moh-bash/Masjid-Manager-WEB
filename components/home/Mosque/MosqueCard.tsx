@@ -6,28 +6,18 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import { Mosque } from "@/lib/features/mosque/types";
 
-interface MosqueCardProps {
-  mosque: {
-    id: string;
-    name: string;
-    location: string;
-    description: string;
-    image: string;
-    circlesCount: number;
-    studentsCount: number;
-  };
-}
 
 export default function MosqueCard({
   mosque,
-}: MosqueCardProps) {
+}: { mosque: Mosque }) {
   return (
     <article className="group overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary-100 hover:shadow-xl hover:shadow-neutral-900/5">
       {/* Image */}
       <div className="relative h-56 overflow-hidden">
         <Image
-          src={mosque.image}
+          src="https://i.pinimg.com/1200x/7d/be/ba/7dbeba53c47a3384454fa85334863193.jpg"
           alt={mosque.name}
           fill
           loading="lazy"
@@ -39,7 +29,7 @@ export default function MosqueCard({
 
         <div className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-neutral-700 backdrop-blur">
           <MapPin className="h-3.5 w-3.5 text-primary" />
-          {mosque.location}
+          {mosque.address}
         </div>
       </div>
 
@@ -49,19 +39,19 @@ export default function MosqueCard({
           {mosque.name}
         </h3>
 
-        <p className="mt-3 min-h-[48px] text-sm leading-6 text-neutral-500">
+        <p className="mt-3 min-h-[48px] text-sm leading-6 text-neutral-500 line-clamp-2">
           {mosque.description}
         </p>
 
         <div className="mt-5 flex items-center gap-5 border-t border-neutral-100 pt-5 text-sm text-neutral-500">
           <span className="flex items-center gap-1.5">
             <BookOpen className="h-4 w-4 text-primary" />
-            {mosque.circlesCount} حلقات
+             حلقات
           </span>
 
           <span className="flex items-center gap-1.5">
             <Users className="h-4 w-4 text-secondary-600" />
-            {mosque.studentsCount} طالب
+             طالب
           </span>
         </div>
 

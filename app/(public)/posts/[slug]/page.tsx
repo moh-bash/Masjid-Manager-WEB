@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import PostDetails from "@/components/home/PostDetails";
+import PostDetails from "@/components/home/Post/PostDetails";
 import { getPostBySlug } from "@/lib/features/post/services/posts.service";
 
 interface PostDetailsPageProps {

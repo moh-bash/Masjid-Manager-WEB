@@ -7,6 +7,9 @@ export const mosqueSchema = z.object({
     managerEmail: z
     .string()
     .email("البريد الإلكتروني غير صالح"),
+    address: z
+    .string()
+    .min(1, "يرجى إدخال عنوان المسجد"),
     location: z.object({
         lat: z.number().min(-90).max(90, "خط العرض يجب أن يكون بين -90 و 90"),
         lng: z.number().min(-180).max(180, "خط الطول يجب أن يكون بين -180 و 180"),

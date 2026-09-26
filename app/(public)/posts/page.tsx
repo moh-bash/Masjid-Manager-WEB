@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import PostCard from "@/components/home/PostCard";
+import PostCard from "@/components/home/Post/PostCard";
 import { getAllPosts } from "@/lib/features/post/services/posts.service";
 
 export default async function PostsPage() {

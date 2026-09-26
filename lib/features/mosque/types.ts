@@ -5,6 +5,8 @@ export interface sendMosque{
     lat: number;
     lng: number;
   };
+  address: string;
+  description: string;
 };
 
 export interface Mosque {
@@ -22,6 +24,9 @@ export interface Mosque {
     lat: number;
     lng: number;
   };
+
+  address: string;
+  description: string;
 
   createdAt: string;
   updatedAt: string;

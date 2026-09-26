@@ -1,10 +1,17 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import homeData from "@/components/home/home.json";
-import MosqueCard from "@/components/home/MosqueCard";
+import { ArrowRight, Mosque } from "lucide-react";
+import MosqueCard from "@/components/home/Mosque/MosqueCard";
+import { getMosques } from "@/lib/features/mosque/services/mosque.service";
 
-export default function MosquesPage() {
-  const mosques = homeData.mosques;
+export default async function MosquesPage() {
+  let mosques: any[] = [];
+
+  try {
+    const response = await getMosques(1);
+    mosques = response.data;
+  } catch (error) {
+    console.error("Error fetching mosques:", error);
+  }
 
   return (
     <div

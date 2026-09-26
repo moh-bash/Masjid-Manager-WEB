@@ -115,15 +115,7 @@ export default async function RecitationStatsVersion({
   return (
     <>
       {recitations.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 text-center">
-          <div className="w-16 h-16 mx-auto rounded-full bg-primary-50 flex items-center justify-center mb-4">
-            <BookOpen size={28} className="text-primary" />
-          </div>
-          <p className="text-gray-600 font-medium">لا توجد تلاوات مسجلة لهذا الطالب بعد</p>
-          <p className="text-sm text-gray-500 mt-1">
-            ستظهر الإحصائيات هنا فور تسجيل التلاوات من قبل المعلم
-          </p>
-        </div>
+        <></>
       ) : (
         <div className="space-y-5">
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

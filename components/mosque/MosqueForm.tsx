@@ -16,12 +16,16 @@ interface MosqueFormData {
     name: string;
     managerEmail: string;
     location: LocationCoordinates;
+    address: string;
+    description?: string;
 }
 
 export interface dataProp {
     name: string;
     managerEmail: string;
     location: LocationCoordinates;
+    address: string;
+    description?: string;
 }
 
 interface MosqueFormProps {
@@ -34,6 +38,8 @@ function MosqueForm({
     const [location, setLocation] = useState<LocationCoordinates | undefined>(undefined);
     const [mosqueName, setMosqueName] = useState("");
     const [managerEmail, setManagerEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [description, setDescription] = useState("");
 
     const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +54,7 @@ function MosqueForm({
         if (initialData) {
             setMosqueName(initialData.name);
             setManagerEmail(initialData.managerEmail);
+            setAddress(initialData.address);
             setLocation(initialData.location);
         }
     }, [initialData]);
@@ -77,17 +84,38 @@ function MosqueForm({
             return;
         }
 
+        if (!address.trim()) {
+            setErrorMessage(
+                "يرجى إدخال عنوان المسجد"
+            );
+            return;
+        }
+
         try {
             setIsLoading(true);
 
             const data: dataProp = {
-                name: mosqueName,
-                managerEmail,
+                name: mosqueName.trim(),
+                managerEmail: managerEmail.trim(),
+                address: address.trim(),
                 location,
+                description: description.trim() || "",
             };
 
             if (mode === "edit") {
-                if (initialData && initialData.name === data.name && initialData.managerEmail === data.managerEmail && initialData.location === data.location) {
+                const locationUnchanged =
+                    initialData &&
+                    initialData.location.lat === data.location.lat &&
+                    initialData.location.lng === data.location.lng;
+
+                if (
+                    initialData &&
+                    initialData.name === data.name &&
+                    initialData.managerEmail === data.managerEmail &&
+                    initialData.address === data.address && 
+                    initialData.description === data.description &&
+                    locationUnchanged
+                ) {
                     showToast({
                         message: "لم يتم تعديل أي بيانات",
                         type: "info",
@@ -180,6 +208,30 @@ function MosqueForm({
                     value={managerEmail}
                     onChange={(e) =>
                         setManagerEmail(e.target.value)
+                    }
+                />
+
+                <Input
+                    id="address"
+                    name="address"
+                    type="text"
+                    label="عنوان المسجد"
+                    placeholder="أدخل عنوان المسجد"
+                    value={address}
+                    onChange={(e) =>
+                        setAddress(e.target.value)
+                    }
+                />
+
+                <Input
+                    id="description"
+                    name="description"
+                    type="text"
+                    label="وصف المسجد"
+                    placeholder="أدخل وصف المسجد"
+                    value={description}
+                    onChange={(e) =>
+                        setDescription(e.target.value)
                     }
                 />
 

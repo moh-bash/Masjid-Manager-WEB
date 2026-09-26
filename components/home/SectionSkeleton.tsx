@@ -1,6 +1,6 @@
-import PostCardSkeleton from "./PostCardSkeleton";
+import CardSkeleton from "./CardSkeleton";
 
-export default function PostsSectionSkeleton() {
+export default function SectionSkeleton() {
   return (
     <section className="bg-white px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -16,9 +16,9 @@ export default function PostsSectionSkeleton() {
 
         {/* Cards skeleton */}
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <PostCardSkeleton />
-          <PostCardSkeleton />
-          <PostCardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
         </div>
       </div>
     </section>

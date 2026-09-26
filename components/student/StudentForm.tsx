@@ -22,6 +22,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
   const [name, setName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [motherName, setMotherName] = useState("");
+  const [fatherName, setFatherName] = useState("");
   const [orphanStatus, setOrphanStatus] = useState<OrphanStatus>(OrphanStatus.NONE);
   const [registrationDate, setRegistrationDate] = useState("");
   const [circleId, setCircleId] = useState("");
@@ -63,6 +64,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
       setName(initialData.name);
       setDateOfBirth(initialData.dateOfBirth.split("T")[0]);
       setMotherName(initialData.motherName);
+      setFatherName(initialData.fatherName);
       setOrphanStatus(initialData.orphanStatus);
       setRegistrationDate(initialData.registrationDate.split("T")[0]);
       setCircleId(initialData.activeCircle?.id || "");
@@ -81,6 +83,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
     if (!name.trim()) return setErrorMessage("يرجى إدخال اسم الطالب");
     if (!dateOfBirth) return setErrorMessage("يرجى إدخال تاريخ الميلاد");
     if (!motherName.trim()) return setErrorMessage("يرجى إدخال اسم الأم");
+    if(!fatherName.trim()) return setErrorMessage("يرجى إدخال اسم الأب");
     if (!circleId) return setErrorMessage("يرجى اختيار الحلقة التي سينضم إليها الطالب");
 
     try {
@@ -90,6 +93,7 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
         name,
         dateOfBirth,
         motherName,
+        fatherName,
         orphanStatus,
         registrationDate,
         circleId,
@@ -125,9 +129,9 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
             {isLoading ? (
               <Loader2 className="animate-spin" />
             ) : mode === "create" ? (
-              "إضافة الطالب"
+              "إضافة"
             ) : (
-              "تحديث البيانات"
+              "تعديل"
             )}
           </Button>
 
@@ -148,10 +152,38 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
           id="name"
           name="name"
           type="text"
-          label="اسم الطالب الرباعي"
+          label="اسم الطالب"
           placeholder="مثال: أحمد محمد  "
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="orphanStatus" className="text-sm font-bold text-slate-700">
+            حالة اليتم
+          </label>
+          <select
+            id="orphanStatus"
+            name="orphanStatus"
+            value={orphanStatus}
+            onChange={(e) => setOrphanStatus(e.target.value as OrphanStatus)}
+            className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3 outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
+          >
+            <option value={OrphanStatus.NONE}>غير يتيم</option>
+            <option value={OrphanStatus.FATHER}>يتيم الأب</option>
+            <option value={OrphanStatus.MOTHER}>يتيم الأم</option>
+            <option value={OrphanStatus.BOTH}>يتيم الأبوين</option>
+          </select>
+        </div>
+
+        <Input
+          id="fatherName"
+          name="fatherName"
+          type="text"
+          label="اسم الأب"
+          placeholder="أدخل اسم الأب"
+          value={fatherName}
+          onChange={(e) => setFatherName(e.target.value)}
         />
 
         <Input
@@ -173,48 +205,6 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
           onChange={(e) => setDateOfBirth(e.target.value)}
         />
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="orphanStatus" className="text-sm font-bold text-slate-700">
-            حالة اليتم
-          </label>
-          <select
-            id="orphanStatus"
-            name="orphanStatus"
-            value={orphanStatus}
-            onChange={(e) => setOrphanStatus(e.target.value as OrphanStatus)}
-            className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3 outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
-          >
-            <option value={OrphanStatus.NONE}>غير يتيم</option>
-            <option value={OrphanStatus.FATHER}>يتيم الأب</option>
-            <option value={OrphanStatus.MOTHER}>يتيم الأم</option>
-            <option value={OrphanStatus.BOTH}>يتيم الأبوين</option>
-          </select>
-        </div>
-        {!circleIdProp && (
-          <div className="flex flex-col gap-2">
-            <label htmlFor="circleId" className="text-sm font-bold text-slate-700">
-              الحلقة
-            </label>
-            <select
-              id="circleId"
-              name="circleId"
-              value={circleId}
-              onChange={(e) => setCircleId(e.target.value)}
-              disabled={isLoadingCircles}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3 outline-none transition focus:border-primary focus:ring-1 focus:ring-primary disabled:opacity-50"
-            >
-              <option value="" disabled>
-                {isLoadingCircles ? "جاري تحميل الحلقات..." : "اختر الحلقة"}
-              </option>
-              {circles.map((circle) => (
-                <option key={circle.id} value={circle.id}>
-                  {circle.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
         <Input
           id="registrationDate"
           name="registrationDate"
@@ -222,17 +212,32 @@ function StudentForm({ mosqueId, initialData, circleIdProp }: StudentFormProps) 
           label="تاريخ التسجيل"
           value={registrationDate}
           onChange={(e) => setRegistrationDate(e.target.value)}
-        />
+          />
 
-        <Input
-          id="parentId"
-          name="parentId"
-          type="text"
-          label="معرف ولي الأمر (اختياري)"
-          placeholder="أدخل UUID لولي الأمر إن وجد"
-          value={parentId}
-          onChange={(e) => setParentId(e.target.value)}
-        />
+          {!circleIdProp && (
+            <div className="flex flex-col gap-2">
+              <label htmlFor="circleId" className="text-sm font-bold text-slate-700">
+                الحلقة
+              </label>
+              <select
+                id="circleId"
+                name="circleId"
+                value={circleId}
+                onChange={(e) => setCircleId(e.target.value)}
+                disabled={isLoadingCircles}
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3 outline-none transition focus:border-primary focus:ring-1 focus:ring-primary disabled:opacity-50"
+              >
+                <option value="" disabled>
+                  {isLoadingCircles ? "جاري تحميل الحلقات..." : "اختر الحلقة"}
+                </option>
+                {circles.map((circle) => (
+                  <option key={circle.id} value={circle.id}>
+                    {circle.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
       </FormUi>
     </form>
   );

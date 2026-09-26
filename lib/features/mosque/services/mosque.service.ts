@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api/client";
+import { api, apiClient } from "@/lib/api/client";
 import { MosqueData } from "../schemas/mosque.schema"
 import { Mosque, MosqueManager } from "../types";
 import { dataProp } from "@/components/mosque/MosqueForm";
@@ -10,7 +10,7 @@ return response.data;
 }
 
 export async function getMosques(page: number): Promise<PaginatedResponse<Mosque>> {
-    const response = await apiClient.get<PaginatedResponse<Mosque> >(`/mosques?page=${page}&limit=8`);
+    const response = await api.get<PaginatedResponse<Mosque> >(`/mosques?page=${page}&limit=8`);
     return response.data;
 }
 

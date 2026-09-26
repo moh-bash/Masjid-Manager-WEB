@@ -43,7 +43,7 @@ export default function PostCard({ post, }: PostCardProps) {
           {post.title}
         </h2>
 
-        <p className="mt-3 line-clamp-3 text-sm leading-7 text-neutral-500">
+        <p className="mt-3 line-clamp-2 text-sm leading-7 text-neutral-500">
           {post.excerpt}
         </p>
 

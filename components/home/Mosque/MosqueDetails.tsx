@@ -7,22 +7,13 @@ import {
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-interface MosqueDetailsProps {
-  mosque: {
-    id: string;
-    name: string;
-    location: string;
-    description: string;
-    image: string;
-    circlesCount: number;
-    studentsCount: number;
-  };
-}
+import { Mosque } from "@/lib/features/mosque/types";
 
 export default function MosqueDetails({
   mosque,
-}: MosqueDetailsProps) {
+}: {
+  mosque: Mosque;
+}) {
     const router = useRouter();
   return (
     <>
@@ -40,7 +31,7 @@ export default function MosqueDetails({
           <div className="mt-8 overflow-hidden rounded-[2rem] bg-neutral-900">
             <div className="relative h-[420px] sm:h-[500px]">
               <img
-                src={mosque.image}
+                src="https://i.pinimg.com/1200x/7d/be/ba/7dbeba53c47a3384454fa85334863193.jpg"
                 alt={mosque.name}
                 className="h-full w-full object-cover"
               />
@@ -50,7 +41,7 @@ export default function MosqueDetails({
               <div className="absolute right-6 bottom-6 left-6 sm:right-10 sm:bottom-10 sm:left-10">
                 <div className="flex items-center gap-2 text-sm text-primary-100">
                   <MapPin className="h-4 w-4" />
-                  {mosque.location}
+                  {mosque.address}
                 </div>
 
                 <h1 className="mt-3 text-3xl font-bold text-white sm:text-5xl">
@@ -102,7 +93,7 @@ export default function MosqueDetails({
                     </p>
 
                     <p className="mt-1 text-2xl font-bold text-neutral-900">
-                      {mosque.circlesCount}
+                      {/* {mosque.circlesCount} */}
                     </p>
                   </div>
                 </div>
@@ -120,7 +111,7 @@ export default function MosqueDetails({
                     </p>
 
                     <p className="mt-1 text-2xl font-bold text-neutral-900">
-                      {mosque.studentsCount}
+                      {/* {mosque.studentsCount} */}
                     </p>
                   </div>
                 </div>
@@ -138,7 +129,7 @@ export default function MosqueDetails({
                     </p>
 
                     <p className="mt-1 font-bold text-neutral-900">
-                      {mosque.location}
+                      {mosque.address}
                     </p>
                   </div>
                 </div>

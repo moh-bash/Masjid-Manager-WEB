@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import homeData from "@/components/home/home.json";
-import MosqueDetails from "@/components/home/MosqueDetails";
+import MosqueDetails from "@/components/home/Mosque/MosqueDetails";
+import { getMosqueById } from "@/lib/features/mosque/services/mosque.service";
 
 interface MosqueDetailsPageProps {
   params: Promise<{
@@ -13,9 +14,14 @@ export default async function MosqueDetailsPage({
 }: MosqueDetailsPageProps) {
   const { mosqueId } = await params;
 
-  const mosque = homeData.mosques.find(
-    (item) => item.id === mosqueId
-  );
+  let mosque;
+  try {
+    const response = await getMosqueById(mosqueId);
+    mosque = response;
+  } catch (error) {
+    console.error("Error fetching mosque details:", error);
+    mosque = null;
+  }
 
   if (!mosque) {
     notFound();

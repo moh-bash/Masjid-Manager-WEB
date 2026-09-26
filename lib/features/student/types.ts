@@ -16,6 +16,10 @@ export interface PastCircle {
   circleName: string;
   joinDate: string;
   leaveDate: string;
+  circle?: {
+    id: string;
+    name: string;
+  };
 }
 
 export interface Student {
@@ -23,10 +27,12 @@ export interface Student {
   name: string;
   dateOfBirth: string;
   motherName: string;
+  fatherName: string;
   orphanStatus: OrphanStatus;
   registrationDate: string;
   age: number;
   activeCircle: ActiveCircle | null;
+  circleHistory: PastCircle[];
   pastCircles?: PastCircle[]; 
   
   parent?: {

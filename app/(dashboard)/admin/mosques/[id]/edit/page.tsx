@@ -17,7 +17,8 @@ export default async function EditMosquePage({params}: {params: {id: string}}) {
                     id: mosque.id,
                     name: mosque.name,
                     managerEmail: mosque.manager.email,
-                    location: mosque.location
+                    location: mosque.location,
+                    address: mosque.address,
                 }}
             />
         </DashboardPage>

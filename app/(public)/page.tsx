@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import HeroSection from "@/components/home/HeroSection";
 import homeData from "@/components/home/home.json"
-import MosquesSection from "@/components/home/MosquesSection";
-import ParentSection from "@/components/home/ParentSection";
-import PostsSectionAsync from "@/components/home/PostsSectionAsync";
-import PostsSectionSkeleton from "@/components/home/PostsSectionSkeleton";
+import MosquesSection from "@/components/home/Mosque/MosquesSection";
+import ParentSection from "@/components/home/Post/ParentSection";
+import PostsSectionAsync from "@/components/home/Post/PostsSectionAsync";
 import StatsSection from "@/components/home/StatsSection";
+import SectionSkeleton from "@/components/home/SectionSkeleton";
 
 export default async function HomePage() {
   const mosques = homeData.mosques.slice(0, 3);
@@ -20,11 +20,12 @@ export default async function HomePage() {
 
         <StatsSection stats={homeData.stats} />
 
-        <MosquesSection mosques={mosques} />
-
+        <Suspense fallback={<SectionSkeleton />}>
+          <MosquesSection />
+        </Suspense>
         <ParentSection features={homeData.parentFeatures} />
 
-        <Suspense fallback={<PostsSectionSkeleton />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <PostsSectionAsync />
         </Suspense>
       </main>

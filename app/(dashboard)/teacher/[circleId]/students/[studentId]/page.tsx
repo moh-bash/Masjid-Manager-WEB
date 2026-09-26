@@ -16,6 +16,7 @@ import { getStudentById } from "@/lib/features/student/services/student.service"
 import { Student, OrphanStatus } from "@/lib/features/student/types";
 import { InfoItem } from "@/components/UI/infoItem";
 import { StudentLinkBox } from "@/components/student/StudentLinkBox";
+import StudentPrayerReport from "@/components/prayer/StudentPrayerReport";
 
 const translateOrphanStatus = (status: OrphanStatus): string => {
   switch (status) {
@@ -109,6 +110,11 @@ export default async function StudentDetailsPage({
             value={student.motherName}
           />
           <InfoItem
+            icon={<UserRound size={19} />}
+            label="اسم الأب"
+            value={student.fatherName}
+          />
+          <InfoItem
             icon={<Heart size={19} className={student.orphanStatus !== OrphanStatus.NONE ? "text-rose-500" : ""} />}
             label="الحالة الاجتماعية"
             value={translateOrphanStatus(student.orphanStatus)}
@@ -140,21 +146,13 @@ export default async function StudentDetailsPage({
               <InfoItem
                 icon={<BookOpen size={19} />}
                 label="اسم الحلقة"
-                value={student.activeCircle.name}
+                value={student.circleHistory[0].circle?.name || "غير متوفر"}
               />
               <InfoItem
                 icon={<CalendarDays size={19} />}
                 label="تاريخ الانضمام"
                 value={new Date(student.activeCircle.joinDate).toLocaleDateString("ar-SA", dateOptions)}
               />
-              <div className="pt-2">
-                <Link
-                  href={`/teacher/${circleId}/circles/${student.activeCircle.id}`}
-                  className="text-sm font-medium text-indigo-600 hover:text-indigo-800 underline underline-offset-4"
-                >
-                  عرض تفاصيل الحلقة
-                </Link>
-              </div>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-6 text-center bg-gray-50 rounded-xl border border-gray-100">
@@ -198,6 +196,14 @@ export default async function StudentDetailsPage({
           </div>
         </section>
       </div>
+
+      <section className="mt-8 mb-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <Clock3 className="text-primary" size={22} />
+          إحصائيات وسجل الصلوات
+        </h2>
+        <StudentPrayerReport studentId={student.id} />
+      </section>
 
       {/* Past Circles - Render only if exists and has data */}
       {student.pastCircles && student.pastCircles.length > 0 && (

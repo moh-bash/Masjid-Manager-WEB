@@ -1,24 +1,21 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MosqueCard from "./MosqueCard";
+import { getMosques } from "@/lib/features/mosque/services/mosque.service";
+import { Mosque } from "@/lib/features/mosque/types";
 
-interface Mosque {
-  id: string;
-  name: string;
-  location: string;
-  description: string;
-  image: string;
-  circlesCount: number;
-  studentsCount: number;
-}
 
-interface MosquesSectionProps {
-  mosques: Mosque[];
-}
+export default async function MosquesSection() {
+  let mosques: Mosque[] = [];
+  
+  try{
+    const response = await getMosques(1);
+    mosques = response.data;
+    console.log("Mosques fetched successfully:", response);
+  }catch(error){
+    console.error("Error fetching mosques:", error);
+  }
 
-export default function MosquesSection({
-  mosques,
-}: MosquesSectionProps) {
   return (
     <section className="bg-white px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
