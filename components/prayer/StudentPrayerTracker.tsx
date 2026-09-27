@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Clock, CheckCircle2, AlertCircle, XCircle, Home, Loader2 } from "lucide-react";
-import { PrayerName, PrayerStatus, PrayerLog } from "@/lib/features/prayer/types";
+import { PrayerName, PrayerStatus } from "@/lib/features/prayer/types";
 import { getTodayPrayers, upsertTodayPrayer } from "@/lib/features/prayer/services/prayer.service";
 
 interface StudentPrayerTrackerProps {
@@ -118,27 +118,27 @@ export default function StudentPrayerTracker({ studentId }: StudentPrayerTracker
         <table className="w-full text-right border-collapse">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50/70">
-              <th className="py-3 px-4 font-bold text-gray-700 text-sm">الحالة / الصلاة</th>
-              {PRAYERS.map((p) => (
-                <th key={p.id} className="py-3 px-4 font-bold text-gray-800 text-sm text-center">
-                  <div className="flex items-center justify-center gap-1.5">
-                    {p.label}
-                    {updatingPrayer === p.id && <Loader2 className="w-3.5 h-3.5 text-primary animate-spin" />}
+              <th className="py-3 px-4 font-bold text-gray-700 text-sm">الصلاة</th>
+              {STATUSES.map((statusItem) => (
+                <th key={statusItem.id} className="py-3.5 px-4 text-sm font-medium text-gray-800">
+                  <div className="flex items-center justify-center gap-2">
+                    {statusItem.icon}
+                    <span>{statusItem.label}</span>
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {STATUSES.map((statusItem) => (
-              <tr key={statusItem.id} className="hover:bg-gray-50/50 transition-colors">
-                <td className="py-3.5 px-4 text-sm font-medium text-gray-800">
-                  <div className="flex items-center gap-2">
-                    {statusItem.icon}
-                    <span>{statusItem.label}</span>
+            {PRAYERS.map((prayerItem) => (
+              <tr key={prayerItem.id}>
+                <th scope="row" className="py-3 px-4 font-bold text-gray-800 text-sm text-center">
+                  <div className="flex items-center justify-center gap-1.5">
+                    {prayerItem.label}
+                    {updatingPrayer === prayerItem.id && <Loader2 className="w-3.5 h-3.5 text-primary animate-spin" />}
                   </div>
-                </td>
-                {PRAYERS.map((prayerItem) => {
+                </th>
+                {STATUSES.map((statusItem) => {
                   const isSelected = prayersMap[prayerItem.id] === statusItem.id;
 
                   return (
@@ -146,12 +146,12 @@ export default function StudentPrayerTracker({ studentId }: StudentPrayerTracker
                       <button
                         type="button"
                         onClick={() => handleStatusChange(prayerItem.id, statusItem.id)}
-                        className={`inline-flex items-center justify-center w-7 h-7 rounded-full border-2 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 ${
-                          isSelected
+                        className={`inline-flex items-center justify-center w-7 h-7 rounded-full border-2 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 ${isSelected
                             ? `${statusItem.activeColor} scale-110 shadow-md`
                             : "border-gray-300 bg-white hover:border-gray-400 hover:scale-105"
-                        }`}
+                          }`}
                         title={`${statusItem.label} - ${prayerItem.label}`}
+                        aria-label={`${statusItem.label} - ${prayerItem.label}`}
                       >
                         {isSelected && <span className="w-2.5 h-2.5 rounded-full bg-white" />}
                       </button>

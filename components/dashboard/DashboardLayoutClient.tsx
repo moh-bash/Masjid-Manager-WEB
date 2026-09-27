@@ -25,17 +25,14 @@ export default function DashboardLayoutClient({
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // استنتاج الدور النشط من المسار
   const activeRoleId = useMemo(() => {
     const matched = roles.find((role) => pathname.startsWith(role.href));
     return matched?.id || initialRoleId;
   }, [pathname, roles, initialRoleId]);
 
-  // جلب العناصر بدون تصفية صلاحيات
   const navigation = useMemo(() => dashboardNavigation(pathname), [pathname]);
   const items = navigation[activeRoleId] || [];
 
-  // تغيير الدور مع التنقل الفعلي
   const handleRoleChange = useCallback(
     (roleId: Role) => {
       const role = roles.find((r) => r.id === roleId);
@@ -47,7 +44,6 @@ export default function DashboardLayoutClient({
     [roles, router]
   );
 
-  // تسجيل الخروج
   const handleLogout = useCallback(async () => {
     try {
       const response = await fetch("/api/auth/logout", {

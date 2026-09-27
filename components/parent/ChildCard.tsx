@@ -17,19 +17,15 @@ export default function ChildCard({ child }: ChildCardProps) {
 
       <div className="flex items-center justify-between mb-4 pl-2">
         <div className="flex items-center gap-4 text-right flex-row-reverse">
-          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-100 shrink-0">
-            <Image
-              src={`https://i.pravatar.cc/150?u=${child.id}`}
-              alt={`صورة ${child.name}`}
-              width={56}
-              height={56}
-              className="object-cover w-full h-full"
-            />
-          </div>
           <div>
             <h3 className="font-bold text-gray-900 text-lg group-hover:text-primary transition-colors">
               {child.name}
             </h3>
+          </div>
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-100 shrink-0">
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-500 text-sm font-bold">{child.name.charAt(0)}</span>
+            </div>
           </div>
         </div>
       </div>
