@@ -67,12 +67,6 @@ export function dashboardNavigation(
         icon: BookOpen,
       },
       {
-        id: 4,
-        label: "التقارير",
-        href: "/admin/reports",
-        icon: ClipboardList,
-      },
-      {
         id: 5,
         label: "الإعدادات",
         href: "/admin/settings",
@@ -103,14 +97,6 @@ export function dashboardNavigation(
           : "/",
         icon: Users,
       },
-      {
-        id: 9,
-        label: "الإعدادات",
-        href: mosqueId
-          ? `/mosque/${mosqueId}/settings`
-          : "/",
-        icon: Settings,
-      },
     ],
 
     CIRCLE_TEACHER: [
@@ -129,14 +115,6 @@ export function dashboardNavigation(
           ? `/teacher/${circleId}/students`
           : "/",
         icon: Users,
-      },
-      {
-        id: 12,
-        label: "التقارير",
-        href: circleId
-          ? `/teacher/${circleId}/reports`
-          : "/",
-        icon: ClipboardList,
       },
       {
         id: 14,
