@@ -49,6 +49,11 @@ export async function login( data: LoginData ): Promise<LoginResponse> {
   }
 }
 
+export async function logout(): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.delete("token");
+}
+
 export async function getAllusers(page: number): Promise<PaginatedResponse<User>> {
   const response = await apiClient.get<PaginatedResponse<User>>(`/users?page=${page}&limit=8` );
   return response.data;

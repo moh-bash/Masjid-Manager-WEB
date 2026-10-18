@@ -16,7 +16,12 @@ export default async function CircleStudentsPage({ params }: {
             {/* Header */}
             <header>
                 <div className="py-4 flex items-center justify-between">
-                    <h1 className="text-lg font-semibold text-gray-800">الطلاب</h1>
+                    <div>
+                        <h1 className="text-2xl font-bold text-slate-900">الطلاب</h1>
+                        <p className="mt-1 text-sm text-slate-500">
+                            إدارة بيانات طلاب الحلقة وحالات الانتساب.
+                        </p>
+                    </div>
                     <Button
                         size="md"
                         href={`/teacher/${circleId}/students/add`}
@@ -44,7 +49,7 @@ export default async function CircleStudentsPage({ params }: {
                             <StudentCard
                                 key={student.id}
                                 student={student}
-                                circleId={params.circleId}
+                                circleId={circleId}
                             />
                         ))
                     ) : (

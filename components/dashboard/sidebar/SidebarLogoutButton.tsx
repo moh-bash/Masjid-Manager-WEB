@@ -1,20 +1,22 @@
-// src/components/dashboard/sidebar/SidebarLogoutButton.tsx
-
 "use client";
 
-import { LogOut } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 
 interface SidebarLogoutButtonProps {
   onClick: () => void;
+  isLoading?: boolean;
 }
 
 export default function SidebarLogoutButton({
   onClick,
+  isLoading = false,
 }: SidebarLogoutButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={isLoading}
+      aria-busy={isLoading}
       className="
         flex
         h-15
@@ -34,11 +36,24 @@ export default function SidebarLogoutButton({
         hover:bg-[#A8324C]
         hover:shadow-lg
         hover:shadow-red-950/20
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-white/70
+        focus-visible:ring-offset-2
+        focus-visible:ring-offset-secondary-950
+        disabled:cursor-not-allowed
+        disabled:opacity-70
+        disabled:hover:bg-[#8B2E42]
+        disabled:hover:shadow-none
       "
     >
-      <span>تسجيل الخروج</span>
+      <span>{isLoading ? "جاري تسجيل الخروج..." : "تسجيل الخروج"}</span>
 
-      <LogOut className="size-7" />
+      {isLoading ? (
+        <Loader2 className="size-7 animate-spin" />
+      ) : (
+        <LogOut className="size-7" />
+      )}
     </button>
   );
 }

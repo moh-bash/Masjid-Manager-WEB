@@ -1,6 +1,8 @@
 "use client";
 
+import { Mosque } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { SELECT_CLASSES } from "@/lib/features/analytics/constants";
 
 interface Mosque {
   id: string;
@@ -17,14 +19,16 @@ export default function MosqueSwitcher({
   const router = useRouter();
   const params = useParams();
 
-  const currentMosqueId = params.id as string;
+  const currentMosqueId = params.mosqueId as string;
 
   return (
     <select
-      value={currentMosqueId}
+      aria-label="اختر المسجد"
+      value={currentMosqueId || ""}
       onChange={(e) => {
         router.push(`/mosque/${e.target.value}`);
       }}
+      className={`${SELECT_CLASSES} max-w-[16rem] cursor-pointer truncate font-semibold`}
     >
       {mosques.map((mosque) => (
         <option key={mosque.id} value={mosque.id}>

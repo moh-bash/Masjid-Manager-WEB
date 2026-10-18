@@ -1,5 +1,5 @@
 import Button from "@/components/UI/Button";
-import { getTeacherCircles } from "@/lib/features/circle/services/circle.service"; // المسار الافتراضي
+import { getTeacherCircles } from "@/lib/features/circle/services/circle.service";
 import { redirect } from "next/navigation";
 
 export default async function TeacherDashboard() {
@@ -12,9 +12,10 @@ export default async function TeacherDashboard() {
 
     // Error State
     return (
-      <div className="flex h-screen flex-col items-center justify-center gap-4 text-center">
-        حدث خطأ أثناء جلب الحلقات الخاصة بك.
-        <br />
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-4 text-center">
+        <p className="text-base font-semibold text-gray-900">
+          حدث خطأ أثناء جلب الحلقات الخاصة بك.
+        </p>
         <Button href="/" size="lg">
           الرئيسية
         </Button>
@@ -29,13 +30,13 @@ export default async function TeacherDashboard() {
 
   // Empty State
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-4 text-center">
-      لست معيناً كمعلم في أي حلقة حتى الآن.
-      <br />
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-4 text-center">
+      <p className="text-base font-semibold text-gray-900">
+        لست معيناً كمعلم في أي حلقة حتى الآن.
+      </p>
       <Button href="/" size="lg">
         الرئيسية
       </Button>
     </div>
   );
 }
-

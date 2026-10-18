@@ -1,11 +1,13 @@
 "use client";
 
-import { Menu, Mosque } from "lucide-react";
+import { AlertCircle, Menu, Mosque } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useMemo, useCallback } from "react";
 import Sidebar from "./sidebar/Sidebar";
 import { SidebarRole, SidebarUser } from "./sidebar/types";
 import { dashboardNavigation, UserRole } from "@/config/dashboard-navigation";
+import { logout } from "@/lib/features/auth/services/auth.service";
+import { useToast } from "@/context/toast";
 import { Role } from "@/lib/features/auth/types";
 
 interface DashboardLayoutClientProps {
@@ -24,6 +26,8 @@ export default function DashboardLayoutClient({
   const pathname = usePathname();
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const { showToast } = useToast();
 
   const activeRoleId = useMemo(() => {
     const matched = roles.find((role) => pathname.startsWith(role.href));
@@ -45,20 +49,22 @@ export default function DashboardLayoutClient({
   );
 
   const handleLogout = useCallback(async () => {
+    if (isLoggingOut) return;
+    setIsLoggingOut(true);
     try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        router.push("/login");
-      } else {
-        console.error("Logout failed");
-      }
+      await logout();
+      localStorage.removeItem("token");
+      router.push("/login");
     } catch (error) {
       console.error("Logout error:", error);
+      showToast({
+        message: "تعذر تسجيل الخروج، يرجى المحاولة مرة أخرى.",
+        type: "danger",
+        Icon: AlertCircle,
+      });
+      setIsLoggingOut(false);
     }
-  }, [router]);
+  }, [isLoggingOut, router, showToast]);
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -69,6 +75,7 @@ export default function DashboardLayoutClient({
         items={items}
         onRoleChange={handleRoleChange}
         onLogout={handleLogout}
+        isLoggingOut={isLoggingOut}
         isMobileOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
       />

@@ -19,6 +19,7 @@ interface SidebarProps {
   items: SidebarNavItem[];
   onRoleChange: (roleId: Role) => void;
   onLogout: () => void;
+  isLoggingOut?: boolean;
   isMobileOpen: boolean;
   onClose: () => void;
 }
@@ -30,6 +31,7 @@ export default function Sidebar({
   items,
   onRoleChange,
   onLogout,
+  isLoggingOut,
   isMobileOpen,
   onClose,
 }: SidebarProps) {
@@ -87,7 +89,7 @@ export default function Sidebar({
         </div>
 
         <div className="mt-6">
-          <SidebarLogoutButton onClick={onLogout} />
+          <SidebarLogoutButton onClick={onLogout} isLoading={isLoggingOut} />
         </div>
       </aside>
     </>

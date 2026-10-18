@@ -90,8 +90,8 @@ export default async function CircleRecitationPage(props: {
       <header>
         <div className="py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-semibold text-gray-800">التلاوة</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <h1 className="text-2xl font-bold text-slate-900">التلاوة</h1>
+            <p className="mt-1 text-sm text-slate-500">
               سجل تلاوات طلاب الحلقة اليومية
             </p>
           </div>
